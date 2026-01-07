@@ -13,29 +13,30 @@ export default async function MenuPage() {
   const menu: MenuItem[] = await res.json();
 
   return (
-    <main className="min-h-screen bg-white px-6 py-12">
-      <h1 className="mb-8 text-center text-4xl font-bold text-black">
+    <main className="min-h-screen px-6 py-12">
+      <h1 className="mb-10 text-center font-bold">
         Our Menu
       </h1>
 
-      <div className="mx-auto max-w-3xl space-y-6">
+      <div className="container max-w-3xl space-y-6">
         {menu.map((item) => (
           <div
             key={item.id}
-            className="flex justify-between rounded-lg border border-gray-200 p-4"
+            className="flex items-start justify-between rounded-lg border border-gray-200 dark:border-gray-700 p-4"
           >
-            <div>
-              <h2 className="text-lg font-semibold text-black">
+            <div className="pr-4">
+              <h2 className="text-lg font-semibold">
                 {item.name}
               </h2>
+
               {item.description && (
-                <p className="text-sm text-gray-600">
+                <p className="mt-1 text-lg text-gray-600 dark:text-gray-400">
                   {item.description}
                 </p>
               )}
             </div>
 
-            <span className="font-medium text-black">
+            <span className="shrink-0 text-2xl font-semibold">
               ${item.price.toFixed(2)}
             </span>
           </div>
