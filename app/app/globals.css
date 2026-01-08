@@ -1,24 +1,53 @@
 @import "tailwindcss";
 
+/* -------------------------
+   Design Tokens (Restaurant)
+-------------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Warm, food-friendly palette */
+  --background: #fbf7f2;   /* warm cream */
+  --foreground: #1f1f1f;   /* soft black */
+  --muted: #6b6259;        /* warm gray */
+  --border: #e6ddd3;       /* subtle beige */
+  --accent: #BAB86C;       /* olive green */
+
   font-size: 16px;
+}
+
+/* Semantic helpers */
+.bg-app {
+  background-color: var(--background);
+}
+
+.text-app {
+  color: var(--foreground);
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+.border-app {
+  border-color: var(--border);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.text-accent {
+  color: var(--accent);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
 }
 
 /* -------------------------
@@ -27,52 +56,109 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+
+  font-family: var(--font-body), system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   margin: 0;
   padding: 0;
-
   min-height: 100vh;
-  line-height: 1.5;
+
+  line-height: 1.65;
+  letter-spacing: 0;
 
   padding-bottom: env(safe-area-inset-bottom);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 /* -------------------------
-   Touch-Friendly Defaults
+   Typography (Editorial, Food)
 -------------------------- */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading), serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.125rem;
+}
+
+p {
+  font-size: clamp(1rem, 3.5vw, 1.125rem);
+  color: var(--muted);
+}
+
+/* -------------------------
+   Links & Buttons
+-------------------------- */
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 button,
 a {
   min-height: 44px;
   touch-action: manipulation;
 }
 
+/* -------------------------
+   Forms
+-------------------------- */
 input,
 textarea,
 select {
   font-size: 16px;
+  border-radius: 9999px;
 }
 
 /* -------------------------
-   Responsive Typography
+   Layout Helpers
 -------------------------- */
-h1 {
-  font-size: clamp(1.8rem, 6vw, 3rem);
-  line-height: 1.2;
-}
-
-h2 {
-  font-size: clamp(1.5rem, 5vw, 2.25rem);
-}
-
-p {
-  font-size: clamp(1rem, 3.5vw, 1.125rem);
-}
-
 .container {
   width: 100%;
   max-width: 1200px;
   margin-inline: auto;
-  padding-inline: 1rem;
+  padding-inline: 1.25rem;
 }
+
+/* -------------------------
+   Surfaces (Light, Seamless)
+-------------------------- */
+.surface {
+  background-color: var(--background);
+  border-radius: 1.5rem;
+
+  /* very soft lift, no visible frame */
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.06);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.surface:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
